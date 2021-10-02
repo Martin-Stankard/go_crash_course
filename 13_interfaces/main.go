@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"math"
 )
+// works without this so, this shows value receiver
+// with 2 different inplementations...2x structs...
 
-type Shape interface {
-	area() float64
-}
+// are interfaces worth the trouble?
+// type Shape interface {
+// 	area() float64
+// }
 
 type Circle struct {
 	x, y, radius float64
