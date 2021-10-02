@@ -2,50 +2,40 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"math"
 )
 
-//define person struct
-type Person struct {
-	firstName string
-	lastName  string
-	city      string
-	gender    string
-	age       int
+type Shape interface {
+	area() float64
 }
 
-//pointer receiver
-func (p *Person) hasBirthday() {
-
-	p.age++
+type Circle struct {
+	x, y, radius float64
 }
 
-//struct related ...value receiver
-func (p Person) greet() string {
-	return "hello my name is " + p.firstName + " and I am " + strconv.Itoa(p.age) + " years old."
+type Rectangle struct {
+	width, height float64
 }
 
-// getMarried (pointer receiver)
-func (p *Person) getMarried(spouseLastName string) {
-	if p.gender == "f" {
+// inside out inheritance
+// func getArea(s Shape) float64 {
+// 	return s.area()
+// }
 
-		p.lastName = spouseLastName
-	}
+func(c Circle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
+
+func(r Rectangle) area() float64 {
+	return r.width * r.height
 }
 
 func main() {
-
-	fmt.Println("structs")
-
-	person1 := Person{firstName: "Samantha", lastName: "Smith", city: "asdf", gender: "f", age: 25}
-	person2 := Person{"bob", "Su", "Town", "m", 11}
-
-	fmt.Println(person1)
-	fmt.Println(person2)
-	fmt.Println(person1.greet())
-	person2.hasBirthday()
-	person2.getMarried("marriedName")
-	fmt.Println(person2)
-	person1.getMarried("marriedName")
-	fmt.Println(person1)
+	fmt.Println("interfaces")
+	circle := Circle{0,0,5}
+	rect := Rectangle{2.11,2.13}
+	fmt.Println(circle.area())
+	fmt.Println(rect.area())
+	// fmt.Println(getArea(circle))
+	// fmt.Println(getArea(rect))
 }
